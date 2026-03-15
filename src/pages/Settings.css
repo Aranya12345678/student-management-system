@@ -1,0 +1,182 @@
+.settings-main {
+  width: 100%;
+  margin-left:1px;
+  flex: 1;
+}
+
+ /* TABS  (Account & Security / Notifications / Appearance) */
+.settings-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.settings-tab {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.settings-tab.active {
+  background-color: #89A9F1;
+  color: #3d3e71;
+  border-color: #89A9F1;
+  font-weight: bold;
+}
+
+.settings-tab:hover:not(.active) {
+  background-color: #f3f4f6;
+}
+
+ /* SETTINGS CARD  (shared wrapper for all three tab panels) */
+.settings-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  max-width: 80rem;
+  /* max-height: 90rem; */
+}
+
+.settings-card h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3d3e71;
+  margin-bottom: 4px;
+}
+
+.settings-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+/* ─── Form  (Account + Appearance tabs) ──────────────────── */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settings-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #3d3e71;
+}
+
+.settings-form-group input,
+.settings-form-group select {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #374151;
+  outline: none;
+  background: white;
+}
+
+.settings-form-group input:focus,
+.settings-form-group select:focus {
+  border-color: #93c5fd;
+}
+
+.save-btn {
+  background-color: #EBD6FB;
+  color: #A43FAB;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.save-btn:hover { background-color: #e38def; }
+
+/* NOTIFICATIONS TAB — Toggle List */
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 24px;
+}
+
+.toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.toggle-item p {
+  font-size: 14px;
+  font-weight: bold;
+  color: #3d3e71;
+  margin: 0 0 2px 0;
+}
+
+.toggle-item span {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ─── Custom Toggle Switch ───────────────────────────────── */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #e5e7eb;
+  border-radius: 24px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle input:checked + .slider {
+  background-color: #89A9F1;
+}
+
+.toggle input:checked + .slider:before {
+  transform: translateX(20px);
+}

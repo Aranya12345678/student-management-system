@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1773518876144" clover="3.2.0">
+  <project timestamp="1773518876144" name="All files">
+    <metrics statements="12" coveredstatements="11" conditionals="13" coveredconditionals="12" methods="4" coveredmethods="4" elements="29" coveredelements="27" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+    <file name="studentUtils.js" path="C:\Users\arany\Desktop\sms-frontend\src\lib\studentUtils.js">
+      <metrics statements="12" coveredstatements="11" conditionals="13" coveredconditionals="12" methods="4" coveredmethods="4"/>
+      <line num="1" count="2" type="stmt"/>
+      <line num="8" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="9" count="4" type="stmt"/>
+      <line num="10" count="4" type="stmt"/>
+      <line num="14" count="4" type="cond" truecount="5" falsecount="0"/>
+      <line num="15" count="3" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="21" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="22" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="23" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="24" count="0" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

@@ -1,0 +1,105 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Page Layout ───────────────────────────────────────────── */
+.login-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Card ──────────────────────────────────────────────────── */
+.login-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 40px 40px 60px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* ─── Logo ───────────────────────────────────────────────────── */
+.login-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* Title */
+.login-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #3d3e71;
+  margin-bottom: 24px;
+  margin-top: 8px;
+}
+
+/* Input Wrapper */
+.login-input-wrapper {
+  width: 100%;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+/* Input field */
+.login-input {
+  width: 100%;
+  border: 2px solid #3d3e71;
+  border-radius: 999px;
+  padding: 10px 40px 10px 16px;
+  font-size: 14px;
+  outline: none;
+  color: #7C7D81;
+  box-sizing: border-box;
+}
+
+.login-input:focus {
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.3);
+}
+
+.login-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+
+/* Submit button */
+.login-button {
+  width: 100%;
+  background-color: #89A9F1;
+  color: #3d3e71;
+  border: none;
+  border-radius: 999px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.login-button:hover {
+  background-color: #3b82f6;
+}
+
+/* Error message */
+.login-error {
+  color: #ef4444;
+  font-size: 13px;
+  margin-bottom: 12px;
+}

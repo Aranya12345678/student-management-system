@@ -1,0 +1,117 @@
+.profile-main {
+  width: 100%;
+  margin-left:1px;
+  flex: 1;
+}
+
+/* PROFILE CARD */
+.profile-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  max-width: 80rem;
+}
+
+.profile-photo-section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.profile-photo-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #3d3e71;
+  margin-bottom: 6px;
+}
+
+.role-badge {
+  background: #ede9fe;
+  color: #7c3aed;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-divider {
+  border: none;
+  border-top: 1px solid #f3f4f6;
+  margin-bottom: 24px;
+}
+
+/* ─── Edit Form ──────────────────────────────────────────── */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #3d3e71;
+}
+
+.profile-form-group input {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #3d3e71;
+  outline: none;
+}
+
+.profile-form-group input:focus {
+  border-color: #93c5fd;
+}
+
+.disabled-input {
+  background: #f9fafb !important;
+  color: #9ca3af !important;
+  cursor: not-allowed;
+}
+
+/* ─── Save Button ────────────────────────────────────────── */
+.save-btn {
+  background-color: #89A9F1;
+  color: #3d3e71;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.save-btn:hover { background-color: #2563eb; }
+.save-btn:disabled { background-color: #93c5fd; cursor: not-allowed; }
