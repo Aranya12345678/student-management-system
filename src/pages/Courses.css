@@ -175,7 +175,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   z-index: 100;
-  min-width: 120px;
+  min-width: 200px;
   
   /* min-height: ; */
 }
@@ -323,3 +323,152 @@
 }
 
 .submit-btn:hover { background-color: #1e40af; }
+
+/* student courese enrollments */
+.enroll-modal {
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.enroll-modal-header {
+  margin-bottom: 20px;
+}
+
+.enroll-modal-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.enroll-course-name {
+  font-size: 13px;
+  color: #7c3aed;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.enroll-search-section {
+  margin-bottom: 20px;
+}
+
+.enroll-search-section h3,
+.enrolled-list-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.enroll-search-input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  outline: none;
+  margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.enroll-search-input:focus {
+  border-color: #93c5fd;
+}
+
+.enroll-search-results,
+.enrolled-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.enroll-search-item,
+.enrolled-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.enroll-student-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.enroll-student-info p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+  margin: 0;
+}
+
+.enroll-student-info span {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.enroll-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.enroll-avatar-placeholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.enroll-add-btn {
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.enroll-add-btn:hover {
+  background: #1e40af;
+}
+
+.enroll-remove-btn {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.enroll-remove-btn:hover {
+  background: #fee2e2;
+}
+
+.empty-enroll {
+  font-size: 13px;
+  color: #9ca3af;
+  text-align: center;
+  padding: 20px;
+}
+
+.enrolled-list-section {
+  margin-bottom: 20px;
+}

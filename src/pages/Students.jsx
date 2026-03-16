@@ -182,12 +182,17 @@ const generateStudentId = async (degree) => {
   // ─── Client-side Filtering ────────────────────────────────
   // Filters by search term (name or ID) then by degree program dropdown
   const filtered = students
-    .filter(s =>
-      s.student_id?.toLowerCase().includes(search.toLowerCase()) ||
-      `${s.first_name} ${s.last_name}`.toLowerCase().includes(search.toLowerCase())
-    )
-    .filter(s => sortDegree ? s.degree_program === sortDegree : true)
-
+  .filter(s =>
+    s.student_id?.toLowerCase().includes(search.toLowerCase()) ||
+    `${s.first_name} ${s.last_name}`.toLowerCase().includes(search.toLowerCase())
+  )
+  .filter(s => sortDegree ? s.degree_program === sortDegree : true)
+  .sort((a, b) => {
+    if (sortDegree) {
+      return a.student_id?.localeCompare(b.student_id)
+    }
+    return 0
+  })
   // ─── Pagination ───────────────────────────────────────────
   const itemsPerPage = 10
   const totalPages = Math.ceil(filtered.length / itemsPerPage)

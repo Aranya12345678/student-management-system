@@ -1,0 +1,181 @@
+/* ─── TABLET (768px and below) ────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Sidebar — make it narrower */
+  .sidebar {
+    width: 60px !important;
+    padding: 16px 8px !important;
+    overflow: hidden;
+  }
+
+  /* Hide sidebar text, keep icons */
+  .sidebar-link span,
+  .sidebar-section-title,
+  .logout-btn span {
+    display: none !important;
+  }
+
+  .sidebar-link {
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+
+  .logout-btn {
+    justify-content: center !important;
+    padding: 12px !important;
+  }
+
+  /* Hide logo text */
+  .login-logo {
+    width: 40px !important;
+  }
+
+  /* Topbar */
+  .topbar-search {
+    width: 160px !important;
+  }
+
+  .topbar-search-input {
+    width: 100px !important;
+  }
+
+  /* Admin badge — hide name */
+  .admin-badge div {
+    display: none !important;
+  }
+
+  /* Dashboard stats — stack them */
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Dashboard charts — stack them */
+  .charts-row {
+    flex-direction: column !important;
+  }
+
+  .chart-card {
+    width: 100% !important;
+  }
+
+  /* Students table — scrollable */
+  .table-panel {
+    overflow-x: auto !important;
+  }
+
+  .students-table {
+    min-width: 600px !important;
+  }
+
+  /* Courses grid — 2 columns */
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Modal — full width */
+  .modal {
+    width: 90% !important;
+    max-width: 90% !important;
+    margin: 20px auto !important;
+  }
+
+  /* Page header — stack */
+  .page-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  /* Table toolbar — stack */
+  .table-toolbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .table-controls {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .search-input,
+  .sort-select {
+    width: 100% !important;
+  }
+}
+
+/* ─── MOBILE (480px and below) ────────────────────────────── */
+@media (max-width: 480px) {
+
+  /* Hide sidebar completely on mobile */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Main takes full width */
+  .layout-main {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* Topbar */
+  .topbar {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+
+  .topbar-search {
+    width: 120px !important;
+  }
+
+  /* Page content padding */
+  .page-content {
+    padding: 16px !important;
+  }
+
+  /* Courses grid — 1 column */
+  .courses-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Stats cards — 1 column */
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Audit table scrollable */
+  .audit-table {
+    min-width: 500px !important;
+  }
+
+  /* Settings tabs — wrap */
+  .settings-tabs {
+    flex-wrap: wrap !important;
+  }
+
+  /* Profile card */
+  .profile-card {
+    padding: 20px !important;
+  }
+
+  /* Add buttons full width */
+  .add-btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Pagination — smaller buttons */
+  .page-btn {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 11px !important;
+  }
+
+  /* Modal */
+  .modal {
+    width: 95% !important;
+    padding: 20px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}

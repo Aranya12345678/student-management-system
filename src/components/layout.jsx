@@ -18,9 +18,11 @@
 
     // ─── State ────────────────────────────────────────────────
         const [adminPhoto, setAdminPhoto] = useState(null)
+        const [sidebarOpen, setSidebarOpen] = useState(false)
         const [globalSearch, setGlobalSearch] = useState("")
         const [searchResults, setSearchResults] = useState([])
         const [showResults, setShowResults] = useState(false)
+        
 
 
     // ─── Global Search Handler ────────────────────────────────
@@ -61,50 +63,63 @@
     return (
         <div className="layout-container">
 
-        {/* SIDEBAR */}
-        <div className="sidebar">
-            <img
-                                    src={logo}
-                                    alt="Logo"
-                                    className="login-logo"
-                    />
+        {sidebarOpen && (
+  <div
+    className="sidebar-overlay"
+    onClick={() => setSidebarOpen(false)}
+  />
+)}
 
-            <p className="sidebar-section-title">Menu</p>
+{/* SIDEBAR */}
+<div className={`sidebar ${sidebarOpen ? "sidebar-open" : ""}`}>
+  <img
+    src={logo}
+    alt="Logo"
+    className="login-logo"
+  />
 
-            {/* Primary navigation links */}
-            <NavLink to="/dashboard" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
-            <HouseIcon size={24} weight="bold" color="#3d3e71" />Dashboard
-            </NavLink>
-            <NavLink to="/students" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
-            <UsersIcon size={24} weight="bold" color="#3d3e71" />Students
-            </NavLink>
-            <NavLink to="/courses" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
-            <BookOpenUserIcon size={24} weight="bold" color="#3d3e71" />Courses
-            </NavLink>
-            <NavLink to="/activities" className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
-            <ClipboardTextIcon size={24} weight="bold" color="#3d3e71" />Activities
-            </NavLink>
+  <p className="sidebar-section-title">Menu</p>
 
-            {/* Secondary / utility links pinned to the bottom */}
-            <div className="sidebar-bottom">
-            <p className="sidebar-section-title">Other</p>
-            <NavLink to="/profile" className="sidebar-link">
-                <UserCircleIcon size={24} weight="bold" color="#3d3e71" />Profile
-            </NavLink>
-            <NavLink to="/settings" className="sidebar-link">
-                <GearIcon size={24} weight="bold" color="#3d3e71" />Settings
-            </NavLink>
-            <button onClick={handleLogout} className="logout-btn">
-                <SignOutIcon size={24} weight="bold" color="#3d3e71" />Log Out
-            </button>
-            </div>
-        </div>
+  {/* Primary navigation links */}
+  <NavLink to="/dashboard" onClick={() => setSidebarOpen(false)} className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
+    <HouseIcon size={24} weight="bold" color="#3d3e71" />Dashboard
+  </NavLink>
+  <NavLink to="/students" onClick={() => setSidebarOpen(false)} className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
+    <UsersIcon size={24} weight="bold" color="#3d3e71" />Students
+  </NavLink>
+  <NavLink to="/courses" onClick={() => setSidebarOpen(false)} className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
+    <BookOpenUserIcon size={24} weight="bold" color="#3d3e71" />Courses
+  </NavLink>
+  <NavLink to="/activities" onClick={() => setSidebarOpen(false)} className={({ isActive }) => isActive ? "sidebar-link active" : "sidebar-link"}>
+    <ClipboardTextIcon size={24} weight="bold" color="#3d3e71" />Activities
+  </NavLink>
+
+  {/* Secondary / utility links pinned to the bottom */}
+  <div className="sidebar-bottom">
+    <p className="sidebar-section-title">Other</p>
+    <NavLink to="/profile" onClick={() => setSidebarOpen(false)} className="sidebar-link">
+      <UserCircleIcon size={24} weight="bold" color="#3d3e71" />Profile
+    </NavLink>
+    <NavLink to="/settings" onClick={() => setSidebarOpen(false)} className="sidebar-link">
+      <GearIcon size={24} weight="bold" color="#3d3e71" />Settings
+    </NavLink>
+    <button onClick={handleLogout} className="logout-btn">
+      <SignOutIcon size={24} weight="bold" color="#3d3e71" />Log Out
+    </button>
+  </div>
+</div>
 
         {/* RIGHT SIDE */}
         <div className="layout-main">
 
             {/* TOPBAR */}
             <div className="topbar">
+                    <button
+                    className="hamburger-btn"
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                    >
+                    ☰
+                    </button>
             <div className="topbar-search" style={{ position: "relative" }}>
                 <input
                     className="topbar-search-input"

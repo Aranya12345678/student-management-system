@@ -3,7 +3,7 @@ import { supabase } from "../supabase"
 import { getClientIP } from "../lib/getIP"
 import "./Courses.css"
 import { useLocation } from "react-router-dom"
-import { PencilSimpleIcon, TrashIcon } from "@phosphor-icons/react"
+import { PencilSimpleIcon, TrashIcon, UsersIcon } from "@phosphor-icons/react"
 
 // ─── Card Color Palette ────────────────────────────────────────
 // Cycles through these colors for cards that have no banner image
@@ -19,10 +19,18 @@ export default function Courses() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [sortBy, setSortBy] = useState("")
+  const [semesterFilter, setSemesterFilter] = useState("")
   const [showModal, setShowModal] = useState(false)
   const [editCourse, setEditCourse] = useState(null)
   const [openMenu, setOpenMenu] = useState(null)
   const [currentPage, setCurrentPage] = useState(1)
+
+  //course enrollment states
+  const [showEnrollModal, setShowEnrollModal] = useState(false)
+  const [enrollCourse, setEnrollCourse] = useState(null)
+  const [enrolledStudents, setEnrolledStudents] = useState([])
+  const [allStudents, setAllStudents] = useState([])
+  const [enrollSearch, setEnrollSearch] = useState("")
 
   // Controlled form shared between Add and Edit modes
   const [form, setForm] = useState({
@@ -183,15 +191,76 @@ export default function Courses() {
     c.course_id?.toLowerCase().includes(search.toLowerCase())
   )
   .filter(c => {
-    if (sortBy === "4" || sortBy === "5" || sortBy === "6" || sortBy === "7") {
-      return c.semester === parseInt(sortBy)
-    }
+    if (semesterFilter) return c.semester === parseInt(semesterFilter)
     return true
   })
   .sort((a, b) => {
     if (sortBy === "name") return a.course_name.localeCompare(b.course_name)
     return 0
   })
+
+  //student enrollments
+  const fetchEnrolledStudents = async (course) => {
+  const { data } = await supabase
+    .from("enrollment")
+    .select("*, students(*)")
+    .eq("course_id", course.id)
+  setEnrolledStudents(data || [])
+}
+
+const fetchAllStudents = async () => {
+  const { data } = await supabase
+    .from("students")
+    .select("*")
+    .order("student_id", { ascending: true })
+  setAllStudents(data || [])
+}
+
+const handleOpenEnroll = async (course) => {
+  setEnrollCourse(course)
+  await fetchAllStudents()
+  await fetchEnrolledStudents(course)
+  setShowEnrollModal(true)
+  setOpenMenu(null)
+}
+
+const handleEnrollStudent = async (student) => {
+  const alreadyEnrolled = enrolledStudents.find(e => e.student_id === student.id)
+  if (alreadyEnrolled) {
+    alert("Student is already enrolled in this course!")
+    return
+  }
+  const { error } = await supabase.from("enrollment").insert({
+    student_id: student.id,
+    course_id: enrollCourse.id,
+    semester: enrollCourse.semester
+  })
+  if (!error) {
+    await fetchEnrolledStudents(enrollCourse)
+    const ip = await getClientIP()
+    await supabase.from("audit_log").insert({
+      log_id: `ACT${Date.now()}`,
+      description: `Enrolled student ${student.student_id} in course ${enrollCourse.course_name}`,
+      activity_type: "ENROLL",
+      performed_by: "admin@sms.com",
+      ip_address: ip
+    })
+  }
+}
+
+const handleUnenrollStudent = async (enrollmentId, studentId) => {
+  if (!window.confirm("Remove this student from the course?")) return
+  await supabase.from("enrollment").delete().eq("id", enrollmentId)
+  await fetchEnrolledStudents(enrollCourse)
+  const ip = await getClientIP()
+  await supabase.from("audit_log").insert({
+    log_id: `ACT${Date.now()}`,
+    description: `Unenrolled student from course ${enrollCourse.course_name}`,
+    activity_type: "UNENROLL",
+    performed_by: "admin@sms.com",
+    ip_address: ip
+  })
+}
 
   // ─── Pagination ──────────────────────────────────────────────
   const itemsPerPage = 6
@@ -215,10 +284,10 @@ export default function Courses() {
       {/* TOOLBAR */}
       <div className="toolbar">
         <select
-            className="filter-select"
-            value={sortBy === "4" || sortBy === "5" || sortBy === "6" || sortBy === "7" ? sortBy : ""}
-            onChange={(e) => setSortBy(e.target.value)}
-            >
+              className="filter-select"
+              value={semesterFilter}
+              onChange={(e) => setSemesterFilter(e.target.value)}
+          >
             <option value="">All</option>
             <option value="4">Semester 04</option>
             <option value="5">Semester 05</option>
@@ -288,10 +357,15 @@ export default function Courses() {
                   </button>
                   {openMenu === course.id && (
                     <div className="course-dropdown">
-                      <button onClick={() => handleEdit(course)}>
-                        <PencilSimpleIcon size={15} weight="bold" color="#3d3e71"/>Edit</button>
-                      <button className="delete-option" onClick={() => handleDelete(course)}>
-                        <TrashIcon size={15} weight="bold" color="#3d3e71"/> Delete</button>
+                        <button onClick={() => handleEdit(course)}>
+                          <PencilSimpleIcon size={15} weight="bold" color="#3d3e71"/> Edit
+                        </button>
+                        <button onClick={() => handleOpenEnroll(course)}>
+                          <UsersIcon size={15} weight="bold" color="#3d3e71" /> Enroll Students
+                        </button>
+                        <button className="delete-option" onClick={() => handleDelete(course)}>
+                          <TrashIcon size={15} weight="bold" color="#3d3e71"/> Delete
+                        </button>
                     </div>
                   )}
                 </div>
@@ -379,6 +453,101 @@ export default function Courses() {
           </div>
         </div>
       )}
+
+      {/* ENROLLMENT MODAL */}
+{showEnrollModal && (
+  <div className="modal-overlay">
+    <div className="modal enroll-modal">
+      <div className="enroll-modal-header">
+        <h2>Enroll Students</h2>
+        <p className="enroll-course-name">{enrollCourse?.course_name}</p>
+      </div>
+
+      {/* SEARCH TO ADD STUDENTS */}
+      <div className="enroll-search-section">
+        <h3>Add Student</h3>
+        <input
+          className="enroll-search-input"
+          placeholder="Search by student ID or name..."
+          value={enrollSearch}
+          onChange={(e) => setEnrollSearch(e.target.value)}
+        />
+        <div className="enroll-search-results">
+          {allStudents
+            .filter(s =>
+              enrollSearch.length >= 2 && (
+                s.student_id?.toLowerCase().includes(enrollSearch.toLowerCase()) ||
+                `${s.first_name} ${s.last_name}`.toLowerCase().includes(enrollSearch.toLowerCase())
+              )
+            )
+            .slice(0, 5)
+            .map(student => (
+              <div key={student.id} className="enroll-search-item">
+                <div className="enroll-student-info">
+                  {student.photo_url ? (
+                    <img src={student.photo_url} alt="" className="enroll-avatar" />
+                  ) : (
+                    <div className="enroll-avatar-placeholder">👤</div>
+                  )}
+                  <div>
+                    <p>{student.first_name} {student.last_name}</p>
+                    <span>{student.student_id}</span>
+                  </div>
+                </div>
+                <button
+                  className="enroll-add-btn"
+                  onClick={() => handleEnrollStudent(student)}
+                >
+                  + Enroll
+                </button>
+              </div>
+            ))}
+        </div>
+      </div>
+
+      {/* ENROLLED STUDENTS LIST */}
+      <div className="enrolled-list-section">
+        <h3>Enrolled Students ({enrolledStudents.length})</h3>
+        {enrolledStudents.length === 0 ? (
+          <p className="empty-enroll">No students enrolled yet</p>
+        ) : (
+          <div className="enrolled-list">
+            {enrolledStudents.map(enrollment => (
+              <div key={enrollment.id} className="enrolled-item">
+                <div className="enroll-student-info">
+                  {enrollment.students?.photo_url ? (
+                    <img src={enrollment.students.photo_url} alt="" className="enroll-avatar" />
+                  ) : (
+                    <div className="enroll-avatar-placeholder">👤</div>
+                  )}
+                  <div>
+                    <p>{enrollment.students?.first_name} {enrollment.students?.last_name}</p>
+                    <span>{enrollment.students?.student_id}</span>
+                  </div>
+                </div>
+                <button
+                  className="enroll-remove-btn"
+                  onClick={() => handleUnenrollStudent(enrollment.id, enrollment.student_id)}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+        <button className="cancel-btn" onClick={() => {
+          setShowEnrollModal(false)
+          setEnrollCourse(null)
+          setEnrolledStudents([])
+          setEnrollSearch("")
+        }}>
+          Close
+        </button>
+      </div>
+    </div>
+    )}
 
     </div>
   )
