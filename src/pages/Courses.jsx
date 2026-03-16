@@ -357,12 +357,18 @@ const handleUnenrollStudent = async (enrollmentId, studentId) => {
                   </button>
                   {openMenu === course.id && (
                     <div className="course-dropdown">
-                        <button onClick={() => handleEdit(course)}>
+
+                      {/* search */}
+                        <button onClick={() => handleEdit(course)}> 
                           <PencilSimpleIcon size={15} weight="bold" color="#3d3e71"/> Edit
                         </button>
+
+                        {/* semester filter */}
                         <button onClick={() => handleOpenEnroll(course)}>
                           <UsersIcon size={15} weight="bold" color="#3d3e71" /> Enroll Students
                         </button>
+
+                        {/* A-Z sort */}
                         <button className="delete-option" onClick={() => handleDelete(course)}>
                           <TrashIcon size={15} weight="bold" color="#3d3e71"/> Delete
                         </button>
