@@ -221,10 +221,7 @@
 
 .sidebar-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 998;
 }
@@ -236,11 +233,14 @@
   }
 
   .sidebar {
-    left: -250px;
+    left: -220px;
+    width: 220px;
   }
 
   .sidebar.sidebar-open {
     left: 0;
+    top: 0;
+    width: 220px;
   }
 
   .layout-main {
@@ -254,7 +254,7 @@
   }
 
   .topbar-search {
-    width: 150px;
+    /* width: 150px; */
     gap: 8px;
   }
 

@@ -2,33 +2,33 @@
 @media (max-width: 768px) {
 
   /* Sidebar — make it narrower */
-  .sidebar {
+  /* .sidebar {
     width: 60px !important;
     padding: 16px 8px !important;
     overflow: hidden;
-  }
+  } */
 
   /* Hide sidebar text, keep icons */
-  .sidebar-link span,
+  /* .sidebar-link span,
   .sidebar-section-title,
   .logout-btn span {
     display: none !important;
-  }
+  } */
 
-  .sidebar-link {
+  /* .sidebar-link {
     justify-content: center !important;
     padding: 12px !important;
-  }
+  } */
 
-  .logout-btn {
+  /* .logout-btn {
     justify-content: center !important;
     padding: 12px !important;
-  }
+  } */
 
   /* Hide logo text */
-  .login-logo {
+  /* .login-logo {
     width: 40px !important;
-  }
+  } */
 
   /* Topbar */
   .topbar-search {
